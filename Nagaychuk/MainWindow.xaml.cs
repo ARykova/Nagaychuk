@@ -23,11 +23,19 @@ namespace Nagaychuk
     public partial class MainWindow : Window
     {
         public List<BottomElement> BotElements { get; set; }
+        public List<BottomElement> TopElements { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             Repository rep = new Repository();
             BotElements = rep.GetAllBottomElements();
+            botType.ItemsSource = BotElements;
+            botType.DisplayMemberPath = "Name";
+            botMaterial.ItemsSource = BotElements;
+            botMaterial.DisplayMemberPath = "Material";
+            botSize.ItemsSource = BotElements;
+            botSize.DisplayMemberPath = "Size";
         }
     }
 }

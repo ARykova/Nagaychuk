@@ -25,7 +25,7 @@ namespace DataAccessLayer
                     int i2 = 1;
                     for(int k = 0; k < 12; k++)
                     {
-                        if (xlWorkSheet.Cells[i + i2, j].Value != "-")
+                        if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
                         {
                             BottomElements.Add(new BottomElement { Name = xlWorkSheet.Cells[i, 1].Value,
                                                                    Material = xlWorkSheet.Cells[i + i2, 2].Value,

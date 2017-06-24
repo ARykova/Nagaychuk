@@ -10,8 +10,8 @@ namespace Model
     {
         public string Name { get; set; }
         public string Material { get; set; }
-        public int Size { get; set; }
-        public int Price { get; set; }
+        public string Size { get; set; }
+        public double Price { get; set; }
         //
     }
 }

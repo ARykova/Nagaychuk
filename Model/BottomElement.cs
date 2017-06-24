@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class TopYashik
+    public class BottomElement
     {
         public string Name;
         public string Material;
         public int Size;
         public int Price;
+        //
     }
 }

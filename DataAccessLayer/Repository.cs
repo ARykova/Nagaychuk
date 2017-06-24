@@ -161,7 +161,6 @@ namespace DataAccessLayer
             _xlApp.Quit();
 
             return Penals;
-
         }
     }
 }

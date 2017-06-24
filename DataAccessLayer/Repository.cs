@@ -27,22 +27,28 @@ namespace DataAccessLayer
                         Name = xlWorkSheet.Cells[i, 1].Value,
                         Materials = new List<Material>()
                     });
-                    int j = 3;
-                    int i2 = 1;
+                    int j = 6;
+                    int i2 = 0;
                     for(int k = 0; k < 12; k++)
                     {
-                        if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
-                        {
-                            BottomElements[BottomElements.Count - 1].Materials.Add(new Material {NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
-                                                                                                 Size = xlWorkSheet.Cells[i, j].Value,
-                                                                                                 Price = xlWorkSheet.Cells[i + i2, j].Value });
-                        }
-
-                        if (j == 5)
+                        if (j == 6)
                         {
                             j = 3;
                             i2++;
+                            BottomElements[BottomElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
                         }
+                        if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
+                        {
+                            BottomElements[BottomElements.Count - 1].Materials[BottomElements[BottomElements.Count - 1].Materials.Count - 1]
+                                                                    .NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value;
+
+                            BottomElements[BottomElements.Count - 1].Materials[BottomElements[BottomElements.Count - 1].Materials.Count - 1]
+                                                                    .SizeValues
+                                                                    .Add(new Size{ SizeValue = xlWorkSheet.Cells[i, j].Value.ToString(),
+                                                                                   Price = xlWorkSheet.Cells[i + i2, j].Value});
+                        }
+                        j++;
+                        
                     }
                     
                 }
@@ -70,25 +76,31 @@ namespace DataAccessLayer
                         Materials = new List<Material>()
                     });
 
-                    int j = 3;
-                    int i2 = 1;
+                    int j = 6;
+                    int i2 = 0;
                     for (int k = 0; k < 12; k++)
                     {
-                        if (xlWorkSheet.Cells[i + i2, j].Value != "-")
-                        {
-                            TopElements[TopElements.Count - 1].Materials.Add(new Material
-                            {
-                                NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
-                                Size = xlWorkSheet.Cells[i, j].Value,
-                                Price = xlWorkSheet.Cells[i + i2, j].Value
-                            });
-                        }
-
-                        if (j == 5)
+                        if (j == 6)
                         {
                             j = 3;
                             i2++;
+                            TopElements[TopElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
                         }
+                        if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
+                        {
+                            TopElements[TopElements.Count - 1].Materials[TopElements[TopElements.Count - 1].Materials.Count - 1]
+                                .NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value;
+
+                            TopElements[TopElements.Count - 1].Materials[TopElements[TopElements.Count - 1].Materials.Count - 1]
+                                .SizeValues
+                                .Add(new Size
+                                {
+                                    SizeValue = xlWorkSheet.Cells[i, j].Value.ToString(),
+                                    Price = xlWorkSheet.Cells[i + i2, j].Value
+                                });
+                        }
+                        j++;
+
                     }
 
                 }
@@ -116,25 +128,31 @@ namespace DataAccessLayer
                         Materials = new List<Material>()
                     });
 
-                    int j = 3;
-                    int i2 = 1;
+                    int j = 6;
+                    int i2 = 0;
                     for (int k = 0; k < 12; k++)
                     {
-                        if (xlWorkSheet.Cells[i + i2, j].Value != "-")
-                        {
-                            Penals[Penals.Count - 1].Materials.Add(new Material
-                            {
-                                NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
-                                Size = xlWorkSheet.Cells[i, j].Value,
-                                Price = xlWorkSheet.Cells[i + i2, j].Value
-                            });
-                        }
-
-                        if (j == 5)
+                        if (j == 6)
                         {
                             j = 3;
                             i2++;
+                            Penals[Penals.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
                         }
+                        if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
+                        {
+                            Penals[Penals.Count - 1].Materials[Penals[Penals.Count - 1].Materials.Count - 1]
+                                .NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value;
+
+                            Penals[Penals.Count - 1].Materials[Penals[Penals.Count - 1].Materials.Count - 1]
+                                .SizeValues
+                                .Add(new Size
+                                {
+                                    SizeValue = xlWorkSheet.Cells[i, j].Value.ToString(),
+                                    Price = xlWorkSheet.Cells[i + i2, j].Value
+                                });
+                        }
+                        j++;
+
                     }
 
                 }

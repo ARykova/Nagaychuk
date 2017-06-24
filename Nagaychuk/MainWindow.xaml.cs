@@ -24,6 +24,8 @@ namespace Nagaychuk
     {
         public List<BottomElement> BotElements { get; set; }
         public List<BottomElement> TopElements { get; set; }
+        public BottomElement SelectedBottomElement { get; set; }
+        public Material SelectedBottomMaterial { get; set; }
 
         public MainWindow()
         {
@@ -32,10 +34,30 @@ namespace Nagaychuk
             BotElements = rep.GetAllBottomElements();
             botType.ItemsSource = BotElements;
             botType.DisplayMemberPath = "Name";
-            botMaterial.ItemsSource = BotElements;
-            botMaterial.DisplayMemberPath = "Material";
-            botSize.ItemsSource = BotElements;
-            botSize.DisplayMemberPath = "Size";
+        }
+
+        private void topMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void topType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void botType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedBottomElement = (BottomElement) botType.SelectedItem;
+            botMaterial.ItemsSource = SelectedBottomElement.Materials;
+            botMaterial.DisplayMemberPath = "NameOfMaterial";
+        }
+
+        private void botMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedBottomMaterial = (Material)botMaterial.SelectedItem;
+            botSize.ItemsSource = SelectedBottomMaterial.SizeValues;
+            botSize.DisplayMemberPath = "SizeValue";
         }
     }
 }

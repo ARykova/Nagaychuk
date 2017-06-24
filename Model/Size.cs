@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Material
+    public class Size
     {
-        public string NameOfMaterial { get; set; }
-        public List<Size> SizeValues { get; set; }
+        public string SizeValue { get; set; }
+        public double Price { get; set; }
     }
 }

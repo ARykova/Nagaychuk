@@ -29,7 +29,7 @@ namespace DataAccessLayer
                         {
                             BottomElements.Add(new BottomElement { Name = xlWorkSheet.Cells[i, 1].Value,
                                                                    Material = xlWorkSheet.Cells[i + i2, 2].Value,
-                                                                   Size = xlWorkSheet.Cells[i, j].Value,
+                                                                   Size = xlWorkSheet.Cells[i, j].Value.ToString(),
                                                                    Price = xlWorkSheet.Cells[i + i2, j].Value });
                         }
 

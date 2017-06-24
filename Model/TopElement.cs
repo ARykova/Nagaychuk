@@ -9,8 +9,6 @@ namespace Model
     public class TopElement
     {
         public string Name { get; set; }
-        public string Material { get; set; }
-        public string Size { get; set; }
-        public double Price { get; set; }
+        public List<Material> Materials;
     }
 }

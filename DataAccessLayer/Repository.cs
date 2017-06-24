@@ -17,20 +17,25 @@ namespace DataAccessLayer
 
             List<BottomElement> BottomElements = new List<BottomElement>();
             var xlWorkSheet = xlWorkBook.Sheets[1];
+            
             for (int i = 2; i < (xlWorkSheet.Rows.Count); i += 5)
             {
                 if (xlWorkSheet.Cells[i, 1].Value != null)
                 {
+                    BottomElements.Add(new BottomElement
+                    {
+                        Name = xlWorkSheet.Cells[i, 1].Value,
+                        Materials = new List<Material>()
+                    });
                     int j = 3;
                     int i2 = 1;
                     for(int k = 0; k < 12; k++)
                     {
                         if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
                         {
-                            BottomElements.Add(new BottomElement { Name = xlWorkSheet.Cells[i, 1].Value,
-                                                                   Material = xlWorkSheet.Cells[i + i2, 2].Value,
-                                                                   Size = xlWorkSheet.Cells[i, j].Value,
-                                                                   Price = xlWorkSheet.Cells[i + i2, j].Value });
+                            BottomElements[BottomElements.Count - 1].Materials.Add(new Material {NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
+                                                                                                 Size = xlWorkSheet.Cells[i, j].Value,
+                                                                                                 Price = xlWorkSheet.Cells[i + i2, j].Value });
                         }
 
                         if (j == 5)
@@ -59,16 +64,21 @@ namespace DataAccessLayer
             {
                 if (xlWorkSheet.Cells[i, 1].Value != null)
                 {
+                    TopElements.Add(new TopElement
+                    {
+                        Name = xlWorkSheet.Cells[i, 1].Value,
+                        Materials = new List<Material>()
+                    });
+
                     int j = 3;
                     int i2 = 1;
                     for (int k = 0; k < 12; k++)
                     {
                         if (xlWorkSheet.Cells[i + i2, j].Value != "-")
                         {
-                            TopElements.Add(new TopElement
+                            TopElements[TopElements.Count - 1].Materials.Add(new Material
                             {
-                                Name = xlWorkSheet.Cells[i, 1].Value,
-                                Material = xlWorkSheet.Cells[i + i2, 2].Value,
+                                NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
                                 Size = xlWorkSheet.Cells[i, j].Value,
                                 Price = xlWorkSheet.Cells[i + i2, j].Value
                             });
@@ -100,16 +110,21 @@ namespace DataAccessLayer
             {
                 if (xlWorkSheet.Cells[i, 1].Value != null)
                 {
+                    Penals.Add(new Penal
+                    {
+                        Name = xlWorkSheet.Cells[i, 1].Value,
+                        Materials = new List<Material>()
+                    });
+
                     int j = 3;
                     int i2 = 1;
                     for (int k = 0; k < 12; k++)
                     {
                         if (xlWorkSheet.Cells[i + i2, j].Value != "-")
                         {
-                            Penals.Add(new Penal
+                            Penals[Penals.Count - 1].Materials.Add(new Material
                             {
-                                Name = xlWorkSheet.Cells[i, 1].Value,
-                                Material = xlWorkSheet.Cells[i + i2, 2].Value,
+                                NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value,
                                 Size = xlWorkSheet.Cells[i, j].Value,
                                 Price = xlWorkSheet.Cells[i + i2, j].Value
                             });

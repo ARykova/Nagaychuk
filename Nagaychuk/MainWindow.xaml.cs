@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DataAccessLayer;
+using Model;
 
 namespace Nagaychuk
 {
@@ -20,9 +22,12 @@ namespace Nagaychuk
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<BottomElement> BotElements { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            Repository rep = new Repository();
+            BotElements = rep.GetAllBottomElements();
         }
     }
 }

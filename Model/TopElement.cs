@@ -8,9 +8,9 @@ namespace Model
 {
     public class TopElement
     {
-        public string Name;
-        public string Material;
-        public int Size;
-        public int Price;
+        public string Name { get; set; }
+        public string Material { get; set; }
+        public int Size { get; set; }
+        public int Price { get; set; }
     }
 }

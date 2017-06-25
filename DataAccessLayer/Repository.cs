@@ -58,6 +58,7 @@ namespace DataAccessLayer
                 else break;
             }
 
+            xlWorkBook = null;
             xlWorkSheet = null;
             _xlApp.Quit();
             
@@ -113,6 +114,9 @@ namespace DataAccessLayer
                 }
                 else break;
             }
+
+            xlWorkBook = null;
+            xlWorkSheet = null;
             _xlApp.Quit();
 
             return TopElements;
@@ -168,9 +172,84 @@ namespace DataAccessLayer
                 }
                 else break;
             }
+
+            xlWorkBook = null;
+            xlWorkSheet = null;
             _xlApp.Quit();
 
             return Penals;
+        }
+
+        public void SaveOrders(BottomElement bot, Material botMaterial, Size botSize,
+                               TopElement top, Material topMaterial, Size topSize,
+                               Penal penal, Material penalMaterial, Size penalSize,
+                               double price)
+        {
+            var _xlApp = new Microsoft.Office.Interop.Excel.Application();
+            var xlWorkBook = _xlApp.Workbooks.Open("D:\\Orders.xlsx", Editable: true);
+            var xlWorkSheet = xlWorkBook.Sheets[1];
+
+            double countOfRaws = xlWorkSheet.Cells[1, 5].Value;
+            xlWorkSheet.Cells[countOfRaws, 1] = $"Заказ №{xlWorkSheet.Cells[1, 6].Value}";
+            xlWorkSheet.Cells[countOfRaws, 2] = $"На сумму:";
+            xlWorkSheet.Cells[countOfRaws, 3] = $"{price}";
+            xlWorkSheet.Cells[1, 6].Value += 1;
+            countOfRaws++;
+
+
+            if (topSize != null)
+            {
+                xlWorkSheet.Cells[countOfRaws + 1, 1] = "Верхний элемент:";
+                xlWorkSheet.Cells[countOfRaws + 1, 2] = top.Name;
+                xlWorkSheet.Cells[countOfRaws + 1, 3] = topMaterial.NameOfMaterial;
+                xlWorkSheet.Cells[countOfRaws + 1, 4] = topSize.SizeValue;
+
+            }
+            else
+            {
+                xlWorkSheet.Cells[countOfRaws + 1, 1] = "Верхний элемент:";
+                xlWorkSheet.Cells[countOfRaws + 1, 2] = "-";
+                xlWorkSheet.Cells[countOfRaws + 1, 3] = "-";
+                xlWorkSheet.Cells[countOfRaws + 1, 4] = "-";
+            }
+
+            if (botSize != null)
+            {
+                xlWorkSheet.Cells[countOfRaws + 2, 1] = "Нижний элемент:";
+                xlWorkSheet.Cells[countOfRaws + 2, 2] = bot.Name;
+                xlWorkSheet.Cells[countOfRaws + 2, 3] = botMaterial.NameOfMaterial;
+                xlWorkSheet.Cells[countOfRaws + 2, 4] = botSize.SizeValue;
+
+            }
+            else
+            {
+                xlWorkSheet.Cells[countOfRaws + 2, 1] = "Нижний элемент:";
+                xlWorkSheet.Cells[countOfRaws + 2, 2] = "-";
+                xlWorkSheet.Cells[countOfRaws + 2, 3] = "-";
+                xlWorkSheet.Cells[countOfRaws + 2, 4] = "-";
+            }
+          
+            if (penalSize != null)
+            {
+                xlWorkSheet.Cells[countOfRaws + 3, 1] = "Пенал:";
+                xlWorkSheet.Cells[countOfRaws + 3, 2] = penal.Name;
+                xlWorkSheet.Cells[countOfRaws + 3, 3] = penalMaterial.NameOfMaterial;
+                xlWorkSheet.Cells[countOfRaws + 3, 4] = penalSize.SizeValue;
+            }
+            else
+            {
+                xlWorkSheet.Cells[countOfRaws + 3, 1] = "Пенал:";
+                xlWorkSheet.Cells[countOfRaws + 3, 2] = "-";
+                xlWorkSheet.Cells[countOfRaws + 3, 3] = "-";
+                xlWorkSheet.Cells[countOfRaws + 3, 4] = "-";
+            }
+
+            xlWorkSheet.Cells[1, 5].Value += 6;
+
+            xlWorkBook.Save();
+            xlWorkBook = null;
+            xlWorkSheet = null;
+            _xlApp.Quit();
         }
     }
 }

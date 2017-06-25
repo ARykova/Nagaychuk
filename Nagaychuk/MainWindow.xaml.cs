@@ -37,6 +37,10 @@ namespace Nagaychuk
         public Material SelectedBottomMaterial { get; set; }
         public Material SelectedPenalMaterial { get; set; }
 
+        public Model.Size SelectedSizeTop { get; set; }
+        public Model.Size SelectedSizeBottom { get; set; }
+        public Model.Size SelectedSizePenal { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -120,6 +124,62 @@ namespace Nagaychuk
             {
                 penalSize.ItemsSource = null;
             }
+        }
+
+        private void topSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedSizeTop = (Model.Size)topSize.SelectedItem;
+            recounting();
+        }
+
+        private void botSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedSizeBottom = (Model.Size)botSize.SelectedItem;
+            recounting();
+        }
+
+        private void penalSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedSizePenal = (Model.Size)penalSize.SelectedItem;
+            recounting();
+        }
+
+        double sum = 0;
+
+        private void recounting()
+        {
+            sum = 0;
+            if (SelectedSizeTop != null)
+            {
+                sum += SelectedSizeTop.Price;
+            }
+            if (SelectedSizeBottom != null)
+            {
+                sum += SelectedSizeBottom.Price;
+            }
+            if (SelectedSizePenal != null)
+            {
+                sum += SelectedSizePenal.Price;
+            }
+            PriceLabel.Content = sum;
+
+            if(sum > 0)
+            {
+                Order_Button.IsEnabled = true;
+            }
+            else
+            {
+                Order_Button.IsEnabled = false;
+            }
+        }
+
+        private void Order_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Repository rep = new Repository();
+            rep.SaveOrders(SelectedBottomElement, SelectedBottomMaterial, SelectedSizeBottom,
+                           SelectedTopElement, SelectedTopMaterial, SelectedSizeTop,
+                           SelectedPenal, SelectedPenalMaterial, SelectedSizePenal,
+                           sum);
         }
     }
 }

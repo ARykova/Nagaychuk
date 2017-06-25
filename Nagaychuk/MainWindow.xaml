@@ -11,26 +11,26 @@
         <TextBlock HorizontalAlignment="Left" Margin="30,80,0,0" TextWrapping="Wrap" Text="Нижний шкаф:" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,150,0,0" TextWrapping="Wrap" Text="Пенал" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="88,248,0,0" TextWrapping="Wrap" Text="Стоимость Вашей кухни:" VerticalAlignment="Top"/>
-        <Button Content="Посчитать стоимость" HorizontalAlignment="Left" Margin="185,223,0,0" VerticalAlignment="Top" Width="148"/>
-        <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="185,272,0,0" VerticalAlignment="Top" Width="148"/>
+        <Button x:Name="Order_Button" Content="Сделать заказ" HorizontalAlignment="Left" Margin="185,272,0,0" VerticalAlignment="Top" Width="148" IsEnabled="False" Click="Order_Button_Click"/>
         <ComboBox x:Name="topType" HorizontalAlignment="Left" Margin="60,38,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="topType_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,40,0,0" TextWrapping="Wrap" Text="Тип:" VerticalAlignment="Top" RenderTransformOrigin="-2.984,0.877"/>
         <TextBlock HorizontalAlignment="Left" Margin="185,40,0,0" TextWrapping="Wrap" Text="Материал:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="372,40,0,0" TextWrapping="Wrap" Text="Размер:" VerticalAlignment="Top"/>
         <ComboBox x:Name="topMaterial" HorizontalAlignment="Left" Margin="247,38,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182" SelectionChanged="topMaterial_SelectionChanged"/>
-        <ComboBox x:Name="topSize" HorizontalAlignment="Left" Margin="420,38,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox x:Name="topSize" HorizontalAlignment="Left" Margin="420,38,0,0" VerticalAlignment="Top" Width="72" SelectionChanged="topSize_SelectionChanged"/>
         <ComboBox x:Name="botType" HorizontalAlignment="Left" Margin="60,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="botType_SelectionChanged" SelectedItem="{Binding Path = SelectedBottomElement}"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,110,0,0" TextWrapping="Wrap" Text="Тип:" VerticalAlignment="Top" RenderTransformOrigin="-2.984,0.877"/>
         <TextBlock HorizontalAlignment="Left" Margin="185,110,0,0" TextWrapping="Wrap" Text="Материал:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="372,110,0,0" TextWrapping="Wrap" Text="Размер:" VerticalAlignment="Top"/>
         <ComboBox x:Name="botMaterial" HorizontalAlignment="Left" Margin="247,108,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182" SelectionChanged="botMaterial_SelectionChanged"/>
-        <ComboBox x:Name="botSize" HorizontalAlignment="Left" Margin="420,108,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox x:Name="botSize" HorizontalAlignment="Left" Margin="420,108,0,0" VerticalAlignment="Top" Width="72" SelectionChanged="botSize_SelectionChanged"/>
         <ComboBox x:Name="penalType" HorizontalAlignment="Left" Margin="60,178,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="penalType_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,180,0,0" TextWrapping="Wrap" Text="Тип:" VerticalAlignment="Top" RenderTransformOrigin="-2.984,0.877"/>
         <TextBlock HorizontalAlignment="Left" Margin="185,180,0,0" TextWrapping="Wrap" Text="Материал:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="372,180,0,0" TextWrapping="Wrap" Text="Размер:" VerticalAlignment="Top"/>
         <ComboBox x:Name="penalMaterial" HorizontalAlignment="Left" Margin="247,178,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182" SelectionChanged="penalMaterial_SelectionChanged"/>
-        <ComboBox x:Name="penalSize" HorizontalAlignment="Left" Margin="420,178,0,0" VerticalAlignment="Top" Width="72"/>
+        <ComboBox x:Name="penalSize" HorizontalAlignment="Left" Margin="420,178,0,0" VerticalAlignment="Top" Width="72" SelectionChanged="penalSize_SelectionChanged"/>
+        <Label x:Name="PriceLabel" Content="" HorizontalAlignment="Left" Margin="228,243,0,0" VerticalAlignment="Top" Width="105"/>
 
     </Grid>
 </Window>

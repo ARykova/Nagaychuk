@@ -25,11 +25,11 @@
         <TextBlock HorizontalAlignment="Left" Margin="372,110,0,0" TextWrapping="Wrap" Text="Размер:" VerticalAlignment="Top"/>
         <ComboBox x:Name="botMaterial" HorizontalAlignment="Left" Margin="247,108,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182" SelectionChanged="botMaterial_SelectionChanged"/>
         <ComboBox x:Name="botSize" HorizontalAlignment="Left" Margin="420,108,0,0" VerticalAlignment="Top" Width="72"/>
-        <ComboBox x:Name="penalType" HorizontalAlignment="Left" Margin="60,178,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="penalType" HorizontalAlignment="Left" Margin="60,178,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="penalType_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,180,0,0" TextWrapping="Wrap" Text="Тип:" VerticalAlignment="Top" RenderTransformOrigin="-2.984,0.877"/>
         <TextBlock HorizontalAlignment="Left" Margin="185,180,0,0" TextWrapping="Wrap" Text="Материал:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="372,180,0,0" TextWrapping="Wrap" Text="Размер:" VerticalAlignment="Top"/>
-        <ComboBox x:Name="penalMaterial" HorizontalAlignment="Left" Margin="247,178,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182"/>
+        <ComboBox x:Name="penalMaterial" HorizontalAlignment="Left" Margin="247,178,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.85,-0.182" SelectionChanged="penalMaterial_SelectionChanged"/>
         <ComboBox x:Name="penalSize" HorizontalAlignment="Left" Margin="420,178,0,0" VerticalAlignment="Top" Width="72"/>
 
     </Grid>

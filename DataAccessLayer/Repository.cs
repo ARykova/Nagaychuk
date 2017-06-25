@@ -35,7 +35,10 @@ namespace DataAccessLayer
                         {
                             j = 3;
                             i2++;
-                            BottomElements[BottomElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 1].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 2].Value.Equals("-"))
+                            {
+                                BottomElements[BottomElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            }
                         }
                         if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
                         {
@@ -54,6 +57,8 @@ namespace DataAccessLayer
                 }
                 else break;
             }
+
+            xlWorkSheet = null;
             _xlApp.Quit();
             
             return BottomElements;
@@ -82,22 +87,24 @@ namespace DataAccessLayer
                     {
                         if (j == 6)
                         {
+                            
+
                             j = 3;
                             i2++;
-                            TopElements[TopElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 1].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 2].Value.Equals("-"))
+                            {
+                                TopElements[TopElements.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            }
                         }
                         if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
                         {
                             TopElements[TopElements.Count - 1].Materials[TopElements[TopElements.Count - 1].Materials.Count - 1]
-                                .NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value;
+                                                              .NameOfMaterial = xlWorkSheet.Cells[i + i2, 2].Value;
 
                             TopElements[TopElements.Count - 1].Materials[TopElements[TopElements.Count - 1].Materials.Count - 1]
-                                .SizeValues
-                                .Add(new Size
-                                {
-                                    SizeValue = xlWorkSheet.Cells[i, j].Value.ToString(),
-                                    Price = xlWorkSheet.Cells[i + i2, j].Value
-                                });
+                                                              .SizeValues
+                                                              .Add(new Size{ SizeValue = xlWorkSheet.Cells[i, j].Value.ToString(),
+                                                                             Price = xlWorkSheet.Cells[i + i2, j].Value });
                         }
                         j++;
 
@@ -136,7 +143,10 @@ namespace DataAccessLayer
                         {
                             j = 3;
                             i2++;
-                            Penals[Penals.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 1].Value.Equals("-") || !xlWorkSheet.Cells[i + i2, j + 2].Value.Equals("-"))
+                            {
+                                Penals[Penals.Count - 1].Materials.Add(new Material { SizeValues = new List<Size>() });
+                            }
                         }
                         if (!xlWorkSheet.Cells[i + i2, j].Value.Equals("-"))
                         {

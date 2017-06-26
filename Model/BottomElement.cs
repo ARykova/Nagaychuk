@@ -10,6 +10,6 @@ namespace Model
     {
         public string Name { get; set; }
         public List<Material> Materials;
-        //
+        
     }
 }

@@ -13,7 +13,7 @@ namespace DataAccessLayer
         public List<BottomElement> GetAllBottomElements()
         {
             var _xlApp = new Microsoft.Office.Interop.Excel.Application();
-            var xlWorkBook = _xlApp.Workbooks.Open("D:\\Kuhnya.xlsx", Editable: true);
+            var xlWorkBook = _xlApp.Workbooks.Open("D:\\KursKuh\\Kuhnya.xlsx", Editable: true);
 
             List<BottomElement> BottomElements = new List<BottomElement>();
             var xlWorkSheet = xlWorkBook.Sheets[1];
@@ -61,14 +61,14 @@ namespace DataAccessLayer
             xlWorkBook = null;
             xlWorkSheet = null;
             _xlApp.Quit();
-            
+
             return BottomElements;
         }
 
         public List<TopElement> GetAllTopElements()
         {
             var _xlApp = new Microsoft.Office.Interop.Excel.Application();
-            var xlWorkBook = _xlApp.Workbooks.Open("D:\\Kuhnya.xlsx", Editable: true);
+            var xlWorkBook = _xlApp.Workbooks.Open("D:\\KursKuh\\Kuhnya.xlsx", Editable: true);
 
             List<TopElement> TopElements = new List<TopElement>();
             var xlWorkSheet = xlWorkBook.Sheets[2];
@@ -125,7 +125,7 @@ namespace DataAccessLayer
         public List<Penal> GetAllPenals()
         {
             var _xlApp = new Microsoft.Office.Interop.Excel.Application();
-            var xlWorkBook = _xlApp.Workbooks.Open("D:\\Kuhnya.xlsx", Editable: true);
+            var xlWorkBook = _xlApp.Workbooks.Open("D:\\KursKuh\\Kuhnya.xlsx", Editable: true);
 
             List<Penal> Penals = new List<Penal>();
             var xlWorkSheet = xlWorkBook.Sheets[3];
@@ -186,7 +186,7 @@ namespace DataAccessLayer
                                double price)
         {
             var _xlApp = new Microsoft.Office.Interop.Excel.Application();
-            var xlWorkBook = _xlApp.Workbooks.Open("D:\\Orders.xlsx", Editable: true);
+            var xlWorkBook = _xlApp.Workbooks.Open("D:\\KursKuh\\Orders.xlsx", Editable: true);
             var xlWorkSheet = xlWorkBook.Sheets[1];
 
             double countOfRaws = xlWorkSheet.Cells[1, 5].Value;
@@ -194,7 +194,6 @@ namespace DataAccessLayer
             xlWorkSheet.Cells[countOfRaws, 2] = $"На сумму:";
             xlWorkSheet.Cells[countOfRaws, 3] = $"{price}";
             xlWorkSheet.Cells[1, 6].Value += 1;
-            countOfRaws++;
 
 
             if (topSize != null)
@@ -244,7 +243,7 @@ namespace DataAccessLayer
                 xlWorkSheet.Cells[countOfRaws + 3, 4] = "-";
             }
 
-            xlWorkSheet.Cells[1, 5].Value += 6;
+            xlWorkSheet.Cells[1, 5].Value += 5;
 
             xlWorkBook.Save();
             xlWorkBook = null;

@@ -65,6 +65,10 @@ namespace Nagaychuk
             SelectedTopElement = (TopElement)topType.SelectedItem;
             topMaterial.ItemsSource = SelectedTopElement.Materials;
             topMaterial.DisplayMemberPath = "NameOfMaterial";
+
+            //BitmapImage img = new BitmapImage("D:\\KursKuh\\" + "image.bmp");
+
+            TopImage.Source = new BitmapImage(new Uri("D:\\KursKuh\\Pictures\\Top\\" + $"{SelectedTopElement.Name}" + ".png"));
         }
 
         private void topMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,6 +92,8 @@ namespace Nagaychuk
             SelectedBottomElement = (BottomElement) botType.SelectedItem;
             botMaterial.ItemsSource = SelectedBottomElement.Materials;
             botMaterial.DisplayMemberPath = "NameOfMaterial";
+
+            BotImage.Source = new BitmapImage(new Uri("D:\\KursKuh\\Pictures\\Bottom\\" + $"{SelectedBottomElement.Name}" + ".png"));
         }
 
         private void botMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,6 +116,8 @@ namespace Nagaychuk
             SelectedPenal = (Penal)penalType.SelectedItem;
             penalMaterial.ItemsSource = SelectedPenal.Materials;
             penalMaterial.DisplayMemberPath = "NameOfMaterial";
+
+            PenalImage.Source = new BitmapImage(new Uri("D:\\KursKuh\\Pictures\\Penal\\" + $"{SelectedPenal.Name}" + ".png"));
         }
 
         private void penalMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -180,6 +188,7 @@ namespace Nagaychuk
                            SelectedTopElement, SelectedTopMaterial, SelectedSizeTop,
                            SelectedPenal, SelectedPenalMaterial, SelectedSizePenal,
                            sum);
+            MessageBox.Show("Заказ успешно выполнен");
         }
     }
 }

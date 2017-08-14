@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class BottomElement:IItem
+    public interface IItem
     {
-        public string Name { get; set; }
-        public List<Material> Materials;
-        
+        string Name { get; set; }
     }
 }

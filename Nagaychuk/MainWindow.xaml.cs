@@ -41,9 +41,12 @@ namespace Nagaychuk
         public Model.Size SelectedSizeBottom { get; set; }
         public Model.Size SelectedSizePenal { get; set; }
 
+        public List<OrderItem> Order { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            //DataContext = this;
             Repository rep = new Repository();
 
             TopElements = rep.GetAllTopElements();
@@ -57,6 +60,8 @@ namespace Nagaychuk
             Penals = rep.GetAllPenals();
             penalType.ItemsSource = Penals;
             penalType.DisplayMemberPath = "Name";
+
+            Order = new List<OrderItem>();
         }
 
         //top
@@ -66,6 +71,8 @@ namespace Nagaychuk
             topMaterial.ItemsSource = SelectedTopElement.Materials;
             topMaterial.DisplayMemberPath = "NameOfMaterial";
 
+            topPrice.Text = "Цена:";
+
             //BitmapImage img = new BitmapImage("D:\\KursKuh\\" + "image.bmp");
 
             TopImage.Source = new BitmapImage(new Uri("D:\\KursKuh\\Pictures\\Top\\" + $"{SelectedTopElement.Name}" + ".png"));
@@ -74,6 +81,7 @@ namespace Nagaychuk
         private void topMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {            
             SelectedTopMaterial = (Material)topMaterial.SelectedItem;
+            topPrice.Text = "Цена:";
             if (SelectedTopMaterial != null)
             {
                 topSize.ItemsSource = SelectedTopMaterial.SizeValues;
@@ -92,13 +100,14 @@ namespace Nagaychuk
             SelectedBottomElement = (BottomElement) botType.SelectedItem;
             botMaterial.ItemsSource = SelectedBottomElement.Materials;
             botMaterial.DisplayMemberPath = "NameOfMaterial";
-
+            botPrice.Text = "Цена:";
             BotImage.Source = new BitmapImage(new Uri("D:\\KursKuh\\Pictures\\Bottom\\" + $"{SelectedBottomElement.Name}" + ".png"));
         }
 
         private void botMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedBottomMaterial = (Material)botMaterial.SelectedItem;
+            botPrice.Text = "Цена:";
             if (SelectedBottomMaterial != null)
             {
                 botSize.ItemsSource = SelectedBottomMaterial.SizeValues;
@@ -113,6 +122,7 @@ namespace Nagaychuk
         //penal
         private void penalType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            penalPrice.Text = "Цена:";
             SelectedPenal = (Penal)penalType.SelectedItem;
             penalMaterial.ItemsSource = SelectedPenal.Materials;
             penalMaterial.DisplayMemberPath = "NameOfMaterial";
@@ -123,6 +133,7 @@ namespace Nagaychuk
         private void penalMaterial_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedPenalMaterial = (Material)penalMaterial.SelectedItem;
+            penalPrice.Text = "Цена:";
             if (SelectedPenalMaterial != null)
             {
                 penalSize.ItemsSource = SelectedPenalMaterial.SizeValues;
@@ -137,58 +148,119 @@ namespace Nagaychuk
         private void topSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedSizeTop = (Model.Size)topSize.SelectedItem;
-            recounting();
+            if (SelectedSizeTop != null)
+            {
+                topPrice.Text = "Цена: " + SelectedSizeTop.Price * Convert.ToInt32(topCount.Text);
+            }
         }
 
         private void botSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedSizeBottom = (Model.Size)botSize.SelectedItem;
-            recounting();
+            if (SelectedSizeBottom != null)
+            {
+                botPrice.Text = "Цена: " + SelectedSizeBottom.Price * Convert.ToInt32(botCount.Text);
+            }
         }
 
         private void penalSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedSizePenal = (Model.Size)penalSize.SelectedItem;
-            recounting();
+            if (SelectedSizePenal != null)
+            {
+                penalPrice.Text = "Цена: " + SelectedSizePenal.Price * Convert.ToInt32(penalCount.Text);
+            }
         }
 
         double sum = 0;
 
-        private void recounting()
-        {
-            sum = 0;
-            if (SelectedSizeTop != null)
-            {
-                sum += SelectedSizeTop.Price;
-            }
-            if (SelectedSizeBottom != null)
-            {
-                sum += SelectedSizeBottom.Price;
-            }
-            if (SelectedSizePenal != null)
-            {
-                sum += SelectedSizePenal.Price;
-            }
-            PriceLabel.Content = sum;
-
-            if(sum > 0)
-            {
-                Order_Button.IsEnabled = true;
-            }
-            else
-            {
-                Order_Button.IsEnabled = false;
-            }
-        }
-
         private void Order_Button_Click(object sender, RoutedEventArgs e)
         {
             Repository rep = new Repository();
-            rep.SaveOrders(SelectedBottomElement, SelectedBottomMaterial, SelectedSizeBottom,
-                           SelectedTopElement, SelectedTopMaterial, SelectedSizeTop,
-                           SelectedPenal, SelectedPenalMaterial, SelectedSizePenal,
-                           sum);
+            rep.SaveOrders(Order, sum);
             MessageBox.Show("Заказ успешно выполнен");
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OrderItem orderItem = new OrderItem()
+            {
+                Count = Convert.ToInt32(topCount.Text),
+                ItemName = SelectedTopElement.Name,
+                Material = SelectedTopMaterial.NameOfMaterial,
+                Size = SelectedSizeTop.SizeValue,
+                Type = "Верхний элемент",
+                Price = SelectedSizeTop.Price
+            };
+            Order.Add(orderItem);
+            gridOrder.ItemsSource = null;
+            gridOrder.ItemsSource = Order;
+            sum += orderItem.Cost;
+            PriceLabel.Content = sum;
+            Order_Button.IsEnabled = sum > 0;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OrderItem orderItem = new OrderItem()
+            {
+                Count = Convert.ToInt32(penalCount.Text),
+                ItemName = SelectedPenal.Name,
+                Material = SelectedPenalMaterial.NameOfMaterial,
+                Size = SelectedSizePenal.SizeValue,
+                Type = "Пенал",
+                Price = SelectedSizePenal.Price
+            };
+            Order.Add(orderItem);
+            gridOrder.ItemsSource = null;
+            gridOrder.ItemsSource = Order;
+            sum += orderItem.Cost;
+            PriceLabel.Content = sum;
+            Order_Button.IsEnabled = sum > 0;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            OrderItem orderItem = new OrderItem()
+            {
+                Count = Convert.ToInt32(botCount.Text),
+                ItemName = SelectedBottomElement.Name,
+                Material = SelectedBottomMaterial.NameOfMaterial,
+                Size = SelectedSizeBottom.SizeValue,
+                Type = "Верхний элемент",
+                Price = SelectedSizeBottom.Price
+            };
+            Order.Add(orderItem);
+            gridOrder.ItemsSource = null;
+            gridOrder.ItemsSource = Order;
+            sum += orderItem.Cost;
+            PriceLabel.Content = sum;
+            Order_Button.IsEnabled = sum > 0;
+        }
+
+        private void topCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (SelectedSizeTop != null)
+            {
+                topPrice.Text = "Цена: " + SelectedSizeTop.Price * Convert.ToInt32(topCount.Text);
+            }
+        }
+
+        private void botCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (SelectedSizeBottom != null)
+            {
+                botPrice.Text = "Цена: " + SelectedSizeBottom.Price * Convert.ToInt32(botCount.Text);
+            }
+        }
+
+        private void penalCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (SelectedSizePenal != null)
+            {
+                penalPrice.Text = "Цена: " + SelectedSizePenal.Price * Convert.ToInt32(penalCount.Text);
+            }
+        }
     }
+
 }

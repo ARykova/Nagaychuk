@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class TopElement
+    public class TopElement:IItem
     {
         public string Name { get; set; }
         public List<Material> Materials;
